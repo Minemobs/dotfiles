@@ -1,0 +1,5 @@
+theme = "catppuccin"
+
+[editor]
+auto-save = true
+true-color = true
