@@ -7,7 +7,7 @@ let SDKMAN_DIR = $nu.home-path + '/.sdkman'
 alias sdk = zsh -c sdk
 alias tabs = zellij
 alias xcd = cd (xplr --print-pwd-as-result)
-alias google = ddgr --ev --np -x
+alias google = ddgr --rev --np -x
 alias lg = lazygit
 alias xls = exa --icons --recurse --git-ignore --git --sort=Name
 
