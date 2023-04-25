@@ -113,11 +113,15 @@ export EDITOR='hx'
 alias src="source ~/.zshrc"
 alias xcd='cd "$(xplr --print-pwd-as-result)"'
 alias tabs='zellij'
+alias google='ddgr --rev --np -x'
+alias xls='exa --icons --recurse --git-ignore --git --sort=Name'
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="/home/minemobs/.local/bin:$PATH"
+export PATH="/home/minemobs/.local/bin:$HOME/.local/share/bin:$(go env GOPATH)/bin:$PATH"
+# export PATH=$HOME/.local/share/bin:$PATH
+# export PATH=${PATH}:`go env GOPATH`/bin
 transfer(){ if [ $# -eq 0 ];then echo "No arguments specified.\nUsage:\n transfer <file|directory>\n ... | transfer <file_name>">&2;return 1;fi;if tty -s;then file="$1";file_name=$(basename "$file");if [ ! -e "$file" ];then echo "$file: No such file or directory">&2;return 1;fi;if [ -d "$file" ];then file_name="$file_name.zip" ,;(cd "$file"&&zip -r -q - .)|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null,;else cat "$file"|curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;else file_name=$1;curl --progress-bar --upload-file "-" "https://transfer.sh/$file_name"|tee /dev/null;fi;}
 
 eval $(thefuck --alias)
@@ -125,6 +129,7 @@ eval $(thefuck --alias)
 eval $(thefuck --alias FUCK)
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
+eval "$(github-copilot-cli alias -- "$0")"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -137,3 +142,5 @@ _nala_completion() {
 }
 
 compdef _nala_completion nala
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
