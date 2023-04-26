@@ -10,7 +10,7 @@ format = "$os $directory$fill$all$character"
 symbol = ' '
 
 [character] # The name of the module we are configuring is 'character'
-success_symbol = "[[♥](green) ❯](maroon)"
+success_symbol = "[[💚](green) ❯](maroon)"
 error_symbol = "[[💔](red) ❯](red)"
 
 [directory]
